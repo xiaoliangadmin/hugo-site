@@ -14,7 +14,7 @@ enableRobotsTXT = true
 hasCJKLanguage = true
 enableEmoji = true
 enableGitInfo = true
-copyright = "© {year} NetTinker"
+copyright = "© 2026 NetTinker"
 
 [pagination]
   pagerSize = 10
