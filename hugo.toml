@@ -4,7 +4,7 @@
 # 需要手工修改的地方已标注 “改这里”
 # ==================================================================
 
-baseURL = "https://example.com/"          # 改这里：正式域名
+baseURL = "https://www.netlabnote.top/"
 locale = "zh-CN"
 defaultContentLanguage = "zh-cn"
 title = "NetTinker · 子网掩码"
