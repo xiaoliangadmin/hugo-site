@@ -5,6 +5,7 @@ draft = false
 description = "用 OrbStack 代替 Docker Desktop 跑 Immich，踩了大版本迁移、向量库更换和备份三件事，记一笔。"
 categories = "tech"
 tags = ["Immich", "OrbStack", "Mac mini", "自建服务", "备份", "相册"]
+cover = { image = "/images/covers/immich.jpg", alt = "Mac mini 与照片卡片同步", relative = false }
 +++
 
 手机相册这件事，我从 iCloud 搬出来已经两年了。现在照片全在 Mac mini M1 上，Immich 管界面和索引，备份走异地。这套东西平时安静得像不存在，只有升级的时候才会让人心跳加速。这次大版本升级踩了三个坑，值得写下来。

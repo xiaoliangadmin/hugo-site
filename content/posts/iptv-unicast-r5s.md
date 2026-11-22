@@ -5,6 +5,7 @@ draft = false
 description = "R5S + ImmortalWrt 折腾 IPTV 的一年：udpxy 的瓶颈在哪，msd_lite 怎么配，EPG 和单播地址那几个反复踩的坑。"
 categories = "tech"
 tags = ["OpenWrt", "R5S", "IPTV", "msd_lite", "组播", "家庭网络"]
+cover = { image = "/images/covers/iptv.jpg", alt = "R5S 软路由与电视之间的组播信号", relative = false }
 +++
 
 家里的 IPTV 一直是我网络里最别扭的一环。光猫桥接、R5S 拨号之后，电视盒子要能看，手机和 iPad 也想在内网随时看直播。折腾到今天，方案基本定型：组播进来，单播出去，全家设备只认一个 `.m3u`。这篇把路径和坑记一下。

@@ -5,6 +5,7 @@ draft = false
 description = "肋骨骨折满一百天之后站上长沙马拉松起跑线，在 24 公里处退赛，以及我为什么觉得这是当时最对的选择。"
 categories = "life"
 tags = ["跑步", "马拉松", "恢复", "骑行"]
+cover = { image = "/images/covers/marathon.jpg", alt = "赛道上的跑者", relative = false }
 +++
 
 八月那次摔车之后，我在床上躺了两周。左胸几根肋骨，咳嗽一下就要按住。医生说得轻描淡写：静养，别剧烈运动，等它自己长。
