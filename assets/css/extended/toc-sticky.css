@@ -1,8 +1,66 @@
 /* ============================================================
-   段落导航（宽屏固定右侧目录）
+   段落导航
+   宽屏（>=1280px）：右侧固定目录
+   窄屏（<1280px）：顶部吸顶横向锚点条
    放在 assets/css/extended/ 下，PaperMod 会自动合并进 stylesheet
    ============================================================ */
 
+/* ---------- 窄屏：顶部吸顶锚点条 ---------- */
+.toc-bar {
+    display: none;
+}
+
+@media screen and (max-width: 1279px) {
+    .toc-bar {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        margin: 0 0 14px;
+        padding: 7px 0;
+        background: var(--theme);
+        border-bottom: 1px solid var(--border);
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .toc-bar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .toc-bar__list {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 0;
+        padding: 0 2px;
+        list-style: none;
+        white-space: nowrap;
+    }
+
+    .toc-bar a {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--code-bg);
+        color: var(--secondary);
+        font-size: 13px;
+        line-height: 1.2;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .toc-bar a.is-active {
+        background: var(--primary);
+        color: var(--theme);
+        font-weight: 600;
+    }
+}
+
+/* ---------- 宽屏：右侧固定目录 ---------- */
 .toc-side {
     display: none;
 }
@@ -77,9 +135,10 @@
     }
 }
 
-/* 打印时不要侧栏 */
+/* 打印时不要导航 */
 @media print {
-    .toc-side {
+    .toc-side,
+    .toc-bar {
         display: none !important;
     }
 }

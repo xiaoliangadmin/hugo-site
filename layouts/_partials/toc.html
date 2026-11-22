@@ -6,8 +6,19 @@
   {{- $headings = (index $headings 0).Headings -}}
 {{- end -}}
 
-{{- /* 宽屏：固定在右侧的段落导航，用 Fragments 自己渲染，避免重复 id */ -}}
 {{- with $headings }}
+{{- /* 窄屏：顶部吸顶横向锚点条 */ -}}
+<nav class="toc-bar" aria-label="段落导航">
+  <ul class="toc-bar__list">
+    {{- range . }}
+    {{- if .ID }}
+    <li><a href="#{{ .ID }}" data-anchor="{{ .ID }}">{{ .Title | plainify }}</a></li>
+    {{- end }}
+    {{- end }}
+  </ul>
+</nav>
+
+{{- /* 宽屏：固定在右侧的段落导航，用 Fragments 自己渲染，避免重复 id */ -}}
 <nav class="toc-side" aria-label="段落导航">
   <div class="toc-side__title">目录</div>
   <ul class="toc-side__list">
@@ -42,7 +53,7 @@
 </nav>
 {{- end }}
 
-{{- /* 窄屏：保留 PaperMod 原生折叠目录 */ -}}
+{{- /* 窄屏：保留 PaperMod 原生折叠目录（层级完整，可展开查看） */ -}}
 {{- with $toc }}
 <details class="toc toc-inline" {{ if ($.Param "TocOpen") }}open{{ end }}>
   <summary accesskey="c" title="(Alt + C)">
