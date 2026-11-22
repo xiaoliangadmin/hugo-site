@@ -29,6 +29,7 @@ copyright = "© 2026 NetTinker"
 
 [params]
   env = "production"
+  comments = true
   description = "网络折腾、软路由、自建服务与骑行生活"
   keywords = ["OpenWrt", "软路由", "Immich", "家庭网络", "骑行"]
   author = "NetTinker"
@@ -71,20 +72,20 @@ copyright = "© 2026 NetTinker"
     favicon32x32 = "/favicon-32x32.png"
     apple_touch_icon = "/apple-touch-icon.png"
 
-  # ---------- 评论：giscus（可选，零后端） ----------
-  # 需要先在 GitHub 仓库开启 Discussions，并在 https://giscus.app 取下面四项
-  # [params.giscus]
-  #   repo = "yourname/blog"
-  #   repoId = "R_xxxxxx"
-  #   category = "Announcements"
-  #   categoryId = "DIC_kwDOxxxxxxx"
-  #   mapping = "pathname"
-  #   strict = "0"
-  #   reactionsEnabled = "1"
-  #   emitMetadata = "0"
-  #   inputPosition = "bottom"
-  #   lang = "zh-CN"
-  #   lazyLoading = true
+  # ---------- 评论：giscus ----------
+  [params.giscus]
+    repo = "xiaoliangadmin/hugo-site"
+    repoId = "R_kgDOV3PsXg"
+    category = "Announcements"
+    categoryId = "DIC_kwDOV3PsXs4DLson"
+    mapping = "pathname"
+    strict = "0"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "top"
+    theme = "preferred_color_scheme"
+    lang = "zh-CN"
+    lazyLoading = true
 
 # ==================================================================
 # 导航菜单
