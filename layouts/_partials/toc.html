@@ -1,0 +1,53 @@
+{{- $toc := .TableOfContents -}}
+{{- $headings := .Fragments.Headings -}}
+
+{{- /* Hugo 的 Fragments 顶层有时是一个空壳节点，取它的子级作为一级标题 */ -}}
+{{- if and (eq (len $headings) 1) (eq (index $headings 0).ID "") -}}
+  {{- $headings = (index $headings 0).Headings -}}
+{{- end -}}
+
+{{- /* 宽屏：固定在右侧的段落导航，用 Fragments 自己渲染，避免重复 id */ -}}
+{{- with $headings }}
+<nav class="toc-side" aria-label="段落导航">
+  <div class="toc-side__title">目录</div>
+  <ul class="toc-side__list">
+    {{- range . }}
+    {{- if .ID }}
+    <li>
+      <a href="#{{ .ID }}" data-anchor="{{ .ID }}">{{ .Title | plainify }}</a>
+      {{- with .Headings }}
+      <ul>
+        {{- range . }}
+        {{- if .ID }}
+        <li>
+          <a href="#{{ .ID }}" data-anchor="{{ .ID }}">{{ .Title | plainify }}</a>
+          {{- with .Headings }}
+          <ul>
+            {{- range . }}
+            {{- if .ID }}
+            <li><a href="#{{ .ID }}" data-anchor="{{ .ID }}">{{ .Title | plainify }}</a></li>
+            {{- end }}
+            {{- end }}
+          </ul>
+          {{- end }}
+        </li>
+        {{- end }}
+        {{- end }}
+      </ul>
+      {{- end }}
+    </li>
+    {{- end }}
+    {{- end }}
+  </ul>
+</nav>
+{{- end }}
+
+{{- /* 窄屏：保留 PaperMod 原生折叠目录 */ -}}
+{{- with $toc }}
+<details class="toc toc-inline" {{ if ($.Param "TocOpen") }}open{{ end }}>
+  <summary accesskey="c" title="(Alt + C)">
+    <span class="title">{{ i18n "toc" | default "目录" }}</span>
+  </summary>
+  <div class="inner">{{ . }}</div>
+</details>
+{{- end }}

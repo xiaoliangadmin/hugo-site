@@ -1,0 +1,51 @@
+{{- /* 段落导航：滚动高亮当前段落 */ -}}
+{{- if .IsPage }}
+<script>
+(function () {
+    var nav = document.querySelector('.toc-side');
+    if (!nav) return;
+
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a[data-anchor]'));
+    if (!links.length) return;
+
+    var items = links.map(function (a) {
+        return { a: a, el: document.getElementById(a.getAttribute('data-anchor')) };
+    }).filter(function (x) { return x.el; });
+    if (!items.length) return;
+
+    var OFFSET = 96;        // 判定“当前段落”的顶线，调大=更早切换
+    var ticking = false;
+
+    function update() {
+        ticking = false;
+
+        var best = items[0];
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].el.getBoundingClientRect().top <= OFFSET) {
+                best = items[i];
+            } else {
+                break;
+            }
+        }
+
+        // 滚到底部时强制点亮最后一段
+        var reachedBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 4;
+        if (reachedBottom) best = items[items.length - 1];
+
+        items.forEach(function (it) {
+            it.a.classList.toggle('is-active', it === best);
+        });
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            ticking = true;
+            window.requestAnimationFrame(update);
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+{{- end }}

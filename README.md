@@ -49,7 +49,14 @@ hugo-site/
 ├── wrangler.jsonc             # Cloudflare 静态资源配置
 ├── archetypes/default.md      # 新建文章的模板（front matter）
 ├── layouts/
-│   └── _partials/comments.html  # 自定义 giscus 评论模板
+│   └── _partials/
+│       ├── comments.html        # 自定义 giscus 评论模板
+│       ├── toc.html             # 段落导航：宽屏右侧固定目录
+│       └── extend_footer.html   # 段落导航：滚动高亮脚本
+├── assets/
+│   └── css/
+│       └── extended/
+│           └── toc-sticky.css   # 段落导航样式（自动并入 stylesheet）
 ├── static/
 │   ├── favicon.ico 等图标
 │   ├── safari-pinned-tab.svg
@@ -226,6 +233,42 @@ EOF
 
 ---
 
+## 5.7 段落导航（右侧固定目录）
+
+文章页在宽屏下会在正文右侧常驻一条目录，滚动时高亮当前所在段落。窄屏（<1280px）自动退回正文顶部的折叠目录。
+
+涉及三个文件，都属于「站点覆盖主题」，升级 PaperMod 不会被覆盖：
+
+| 文件 | 作用 |
+|---|---|
+| `layouts/_partials/toc.html` | 覆盖主题同名 partial。宽屏输出 `nav.toc-side`，窄屏保留原生 `details` |
+| `assets/css/extended/toc-sticky.css` | 固定定位、层级缩进、当前段高亮样式（PaperMod 自动合并） |
+| `layouts/_partials/extend_footer.html` | scrollspy 脚本，给当前段加 `.is-active` |
+
+行为规则：
+
+- 全站开关仍是 `hugo.toml` 里的 `ShowToc = true`；某篇文章写 `ShowToc = false` 就不出现目录（`about.md` 就是这种）
+- 目录项由 Hugo 的 `.Fragments.Headings` 生成，**只跟随 Markdown 标题**（`##` / `###` / `####`），不会出现空项
+- 宽屏显示断点是 `1280px`；侧栏位置按 `--main-width` 计算，自动贴着正文右边缘
+
+常用微调：
+
+```css
+/* assets/css/extended/toc-sticky.css */
+top: 88px;                              /* 顶部起始位置，避开导航栏 */
+width: 196px;                           /* 目录宽度 */
+@media screen and (min-width: 1280px)   /* 显示断点，屏幕窄可改小 */
+```
+
+```js
+/* layouts/_partials/extend_footer.html */
+var OFFSET = 96;   // 判定「当前段落」的顶线，调大 → 更早切换高亮
+```
+
+想临时关掉这一整套：把 `hugo.toml` 的 `ShowToc` 改回 `false`，或者删掉 `assets/css/extended/toc-sticky.css`（侧栏会失去定位样式）。
+
+---
+
 ## 6. 评论管理
 
 评论数据全部存在 GitHub Discussions，不在数据库里。
@@ -303,6 +346,7 @@ git push
 | 线上样式全无、纯文本 | 主题没拉下来 | 构建命令必须带 `git submodule update --init --recursive` |
 | 封面 404 | 路径写成相对路径 | 用 `/images/covers/xxx.jpg` 且 `relative = false` |
 | 评论区空白 | 仓库变私有，或 Discussions 关闭 | 仓库保持 public，Settings 里确认 Discussions 已勾选 |
+| 宽屏看不到右侧目录 | 窗口窄于 1280px，或该文 `ShowToc = false` | 拉宽窗口到 1280 以上；检查 front matter |
 | 改了配置线上没变 | Cloudflare 边缘缓存 | 强刷，或在 CF 里 purge cache |
 | 中文标点导致字数统计奇怪 | 没开 CJK 优化 | 确认 `hasCJKLanguage = true` |
 | `hugo server` 报 SCSS 错误 | Hugo 不是 extended 版 | `brew install hugo` 重装 extended |
