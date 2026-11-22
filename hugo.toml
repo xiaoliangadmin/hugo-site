@@ -59,10 +59,7 @@ copyright = "© 2026 NetTinker"
   # ---------- 社交图标（改这里） ----------
   [[params.socialIcons]]
     name = "github"
-    url = "https://github.com/yourname"
-  [[params.socialIcons]]
-    name = "youtube"
-    url = "https://youtube.com/@yourname"
+    url = "https://github.com/xiaoliangadmin"
   [[params.socialIcons]]
     name = "rss"
     url = "/index.xml"
