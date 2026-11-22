@@ -1,0 +1,126 @@
+# ==================================================================
+# Hugo + PaperMod 配置 —— 技术 / 生活 混写
+# 放置位置：站点根目录 /hugo.toml
+# 需要手工修改的地方已标注 “改这里”
+# ==================================================================
+
+baseURL = "https://example.com/"          # 改这里：正式域名
+locale = "zh-CN"
+defaultContentLanguage = "zh-cn"
+title = "NetTinker · 子网掩码"
+theme = "hugo-PaperMod"
+
+enableRobotsTXT = true
+hasCJKLanguage = true
+enableEmoji = true
+enableGitInfo = true
+copyright = "© {year} NetTinker"
+
+[pagination]
+  pagerSize = 10
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# 搜索需要 JSON 输出
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  env = "production"
+  description = "网络折腾、软路由、自建服务与骑行生活"
+  keywords = ["OpenWrt", "软路由", "Immich", "家庭网络", "骑行"]
+  author = "NetTinker"
+
+  DateFormat = "2006-01-02"
+  defaultTheme = "auto"          # auto / light / dark
+
+  ShowReadingTime = true
+  ShowWordCount = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+
+  ShowToc = true                 # 文章默认显示目录
+  TocOpen = false
+  UseHugoToc = true
+
+  ShowAllPagesInArchive = true
+  ShowPageNums = true
+  hideSummary = false
+
+  [params.homeInfoParams]
+    Title = "你好，我是 NetTinker"
+    Content = "折腾家庭网络与软路由，也骑车、也读书。"
+
+  # ---------- 社交图标（改这里） ----------
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/yourname"
+  [[params.socialIcons]]
+    name = "youtube"
+    url = "https://youtube.com/@yourname"
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
+  # ---------- favicon（放 static/ 下） ----------
+  [params.assets]
+    favicon = "/favicon.ico"
+    favicon16x16 = "/favicon-16x16.png"
+    favicon32x32 = "/favicon-32x32.png"
+    apple_touch_icon = "/apple-touch-icon.png"
+
+  # ---------- 评论：giscus（可选，零后端） ----------
+  # 需要先在 GitHub 仓库开启 Discussions，并在 https://giscus.app 取下面四项
+  # [params.giscus]
+  #   repo = "yourname/blog"
+  #   repoId = "R_xxxxxx"
+  #   category = "Announcements"
+  #   categoryId = "DIC_kwDOxxxxxxx"
+  #   mapping = "pathname"
+  #   strict = "0"
+  #   reactionsEnabled = "1"
+  #   emitMetadata = "0"
+  #   inputPosition = "bottom"
+  #   lang = "zh-CN"
+  #   lazyLoading = true
+
+# ==================================================================
+# 导航菜单
+# 技术 / 生活 用分类页承载，不单独开 section
+# ==================================================================
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "categories"
+    name = "分类"
+    url = "/categories/"
+    weight = 20
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 30
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 40
+  [[menu.main]]
+    identifier = "search"
+    name = "搜索"
+    url = "/search/"
+    weight = 50
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 60
