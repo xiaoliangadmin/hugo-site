@@ -6,6 +6,8 @@ ShowToc = false
 ShowBreadCrumbs = false
 hidemeta = true
 comments = false
+[build]
+  list = "never"
 +++
 
 这里是 NetTinker 的自留地。
